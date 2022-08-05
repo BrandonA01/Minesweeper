@@ -8,6 +8,7 @@ public class Window {
     public Window(int width, int height, int X, int Y, String title, Game game){
         frame = new JFrame();
         Window.gameTitle = title;
+        frame.setTitle(gameTitle);
         frame.setPreferredSize(new Dimension(width, height));
         frame.setMinimumSize(new Dimension(width, height));
         frame.setMaximumSize(new Dimension(width, height));

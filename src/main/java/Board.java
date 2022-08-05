@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Board extends JPanel {
@@ -9,7 +11,7 @@ public class Board extends JPanel {
     public Board(GridLayout layout) {
         super(layout);
         int rem = Game.BOMBS;
-        double prob = (double) Game.BOMBS / (Game.Y * Game.X);
+        double prob = (double) rem / (Game.Y * Game.X); // Amount of bombs left / Number of cells
         try{
             for(int i = 0; i < Game.Y; i++){        //This is rows first
                 for(int h = 0; h < Game.X; h++){        //This is columns second
@@ -31,25 +33,36 @@ public class Board extends JPanel {
 
     public void addCells(){
         for(int i = 0; i < grid.size(); i++){
-            if(grid.get(i).nearby < 0){
-                add(grid.get(i)).setBackground(Color.BLACK);
-            }
-            else if(grid.get(i).nearby == 1){
-                add(grid.get(i)).setBackground(Color.yellow);
-            }else if(grid.get(i).nearby == 2){
-                add(grid.get(i)).setBackground(Color.orange);
-            }else if(grid.get(i).nearby > 2){
-                add(grid.get(i)).setBackground(Color.RED);
-            }
-            else{
-                add(grid.get(i));
-            }
+            int j = i;
+            grid.get(i).addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(grid.get(j).isBomb()){
+                        System.out.println("You Lose!");
+                        grid.get(j).setEnabled(false);
+                        grid.get(j).setBackground(Color.BLACK);
+                    }
+                    else {
+                        grid.get(j).setCleared(true);
+                        if(grid.get(j).nearby==0){
 
+                        }
+                        else{
+                            grid.get(j).setEnabled(false);
+                            grid.get(j).setBackground(Color.white);
+                            if(grid.get(j).nearby>0){
+                                grid.get(j).setText(String.valueOf(grid.get(j).nearby));
+                            }
+                        }
+                    }
+                }
+            });
+            add(grid.get(i)).setBackground(Color.GRAY);
         }
     }
 
     public void calcNearbyBombs(){
-        String str = "";
+        String str;
         for(int i = 0; i < Game.Y; i++){
             str = "";
             for(int h = 0; h < Game.X; h++) {
@@ -104,5 +117,43 @@ public class Board extends JPanel {
     }
     public Space[][] getSpaces(){
         return s;
+    }
+
+    public nearbySpaces(){
+        for(int i = 0; i < Game.Y; i++) {
+            for (int h = 0; h < Game.X; h++) {
+                if (i > 0 && s[i - 1][h].isBomb()) {
+
+                }
+                //North East
+                if (h < Game.X - 1 && i > 0 && s[i - 1][h + 1].isBomb()) {
+
+                }
+                //East
+                if (h < Game.X - 1 && s[i][h + 1].isBomb()) {
+
+                }
+                //South East
+                if (h < Game.X - 1 && i < Game.Y - 1 && s[i + 1][h + 1].isBomb()) {
+
+                }
+                //South
+                if (i < Game.Y - 1 && s[i + 1][h].isBomb()) {
+
+                }
+                //South West
+                if (i < Game.Y - 1 && h > 0 && s[i + 1][h - 1].isBomb()) {
+
+                }
+                //West
+                if (h > 0 && s[i][h - 1].isBomb()) {
+
+                }
+                //North West
+                if (h > 0 && i > 0 && s[i - 1][h - 1].isBomb()) {
+
+                }
+            }
+        }
     }
 }
