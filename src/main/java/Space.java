@@ -1,6 +1,6 @@
 public class Space {
     boolean bomb;
-    boolean flag;
+    boolean flagged;
     boolean cleared;
     int num;
 
