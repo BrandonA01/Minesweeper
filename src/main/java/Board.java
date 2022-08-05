@@ -42,10 +42,14 @@ public class Board extends JPanel {
                         grid.get(j).setEnabled(false);
                         grid.get(j).setBackground(Color.BLACK);
                     }
+                    else if(grid.get(j).isCleared()){
+                        grid.get(j).setBackground(Color.blue);
+                    }
                     else {
                         grid.get(j).setCleared(true);
                         if(grid.get(j).nearby==0){
-
+                            grid.get(j).setEnabled(false);
+                            grid.get(j).setBackground(Color.white);
                         }
                         else{
                             grid.get(j).setEnabled(false);
@@ -119,41 +123,4 @@ public class Board extends JPanel {
         return s;
     }
 
-    public nearbySpaces(){
-        for(int i = 0; i < Game.Y; i++) {
-            for (int h = 0; h < Game.X; h++) {
-                if (i > 0 && s[i - 1][h].isBomb()) {
-
-                }
-                //North East
-                if (h < Game.X - 1 && i > 0 && s[i - 1][h + 1].isBomb()) {
-
-                }
-                //East
-                if (h < Game.X - 1 && s[i][h + 1].isBomb()) {
-
-                }
-                //South East
-                if (h < Game.X - 1 && i < Game.Y - 1 && s[i + 1][h + 1].isBomb()) {
-
-                }
-                //South
-                if (i < Game.Y - 1 && s[i + 1][h].isBomb()) {
-
-                }
-                //South West
-                if (i < Game.Y - 1 && h > 0 && s[i + 1][h - 1].isBomb()) {
-
-                }
-                //West
-                if (h > 0 && s[i][h - 1].isBomb()) {
-
-                }
-                //North West
-                if (h > 0 && i > 0 && s[i - 1][h - 1].isBomb()) {
-
-                }
-            }
-        }
-    }
 }
