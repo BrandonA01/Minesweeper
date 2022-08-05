@@ -24,6 +24,7 @@ public class Board {
         }catch(Exception e){
             e.printStackTrace();
         }
+        calcNearbyBombs();
     }
 
     public void calcNearbyBombs(){
@@ -67,5 +68,8 @@ public class Board {
                 }
             }
         }
+    }
+    public Space[][] getSpaces(){
+        return s;
     }
 }
