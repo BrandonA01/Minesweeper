@@ -42,7 +42,8 @@ public class Board extends JPanel {
                         grid.get(j).setEnabled(false);
                         grid.get(j).setBackground(Color.BLACK);
                     }
-                    else if(grid.get(j).nearby==0){
+                    else {
+                        grid.get(j).setCleared(true);
                         NextSpaces n = new NextSpaces();
                         ArrayList<Space> space = n.set(grid.get(j).getY(), grid.get(j).getX(), s);
                         grid = n.emptySpaces(space, s, grid);
@@ -50,15 +51,10 @@ public class Board extends JPanel {
                             if (grid.get(i).isCleared()){
                                 grid.get(i).setEnabled(false);
                                 grid.get(i).setBackground(Color.blue);
-
                             }
                         }
-                    }
-                    else {
-                        grid.get(j).setCleared(true);
                         if(grid.get(j).nearby==0){
                             grid.get(j).setEnabled(false);
-                            grid.get(j).setBackground(Color.white);
                         }
                         else{
                             grid.get(j).setEnabled(false);
