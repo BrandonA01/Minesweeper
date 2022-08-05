@@ -42,8 +42,17 @@ public class Board extends JPanel {
                         grid.get(j).setEnabled(false);
                         grid.get(j).setBackground(Color.BLACK);
                     }
-                    else if(grid.get(j).isCleared()){
-                        grid.get(j).setBackground(Color.blue);
+                    else if(grid.get(j).nearby==0){
+                        NextSpaces n = new NextSpaces();
+                        ArrayList<Space> space = n.set(grid.get(j).getY(), grid.get(j).getX(), s);
+                        grid = n.emptySpaces(space, s, grid);
+                        for (int i = 0; i<grid.size(); i++){
+                            if (grid.get(i).isCleared()){
+                                grid.get(i).setEnabled(false);
+                                grid.get(i).setBackground(Color.blue);
+
+                            }
+                        }
                     }
                     else {
                         grid.get(j).setCleared(true);
