@@ -12,14 +12,14 @@ public class NextSpaces {
     ArrayList<Space> spaces;
 
     public NextSpaces(int Y, int X, Space[][] space){
-        setSpace(1, Y, X-1, space);
-        setSpace(2, Y+1, X-1, space);
-        setSpace(3, Y+1, X, space);
-        setSpace(4, Y+1, X-1, space);
-        setSpace(5, Y-1, X, space);
-        setSpace(6, Y-1, X-1, space);
-        setSpace(7, Y, X-1, space);
-        setSpace(8, Y-1, X-1, space);
+        setSpace(1, checkSquare(Y, X-1, space));
+        setSpace(2, checkSquare( Y+1, X-1, space));
+        setSpace(3, checkSquare( Y+1, X, space));
+        setSpace(4, checkSquare(Y+1, X-1, space));
+        setSpace(5, checkSquare(Y-1, X, space));
+        setSpace(6, checkSquare(Y-1, X-1, space));
+        setSpace(7, checkSquare(Y, X-1, space));
+        setSpace(8, checkSquare(Y-1, X-1, space));
         spaces.add(n);
         spaces.add(ne);
         spaces.add(e);
@@ -39,9 +39,7 @@ public class NextSpaces {
     public void emptySpaces(){
         for(int i = 0; i < spaces.size(); i++){
             Space space = spaces.get(i);
-            if(space != null && space.spaces == null){
 
-            }
         }
     }
 
@@ -55,31 +53,31 @@ public class NextSpaces {
         return bombs;
     }
 
-    public void setSpace(int num, int Y, int X, Space[][] space){
+    public void setSpace(int num,  Space space){
         switch(num){
             case 1:
-                n = space[Y][X];
+                n = space;
                 break;
             case 2:
-                ne = space[Y][X];
+                ne = space;
                 break;
             case 3:
-                e = space[Y][X];
+                e = space;
                 break;
             case 4:
-                se = space[Y][X];
+                se = space;
                 break;
             case 5:
-                s = space[Y][X];
+                s = space;
                 break;
             case 6:
-                sw = space[Y][X];
+                sw = space;
                 break;
             case 7:
-                w = space[Y][X];
+                w = space;
                 break;
             case 8:
-                nw = space[Y][X];
+                nw = space;
                 break;
         }
     }
