@@ -11,7 +11,7 @@ public class NextSpaces {
     private Space nw;
     ArrayList<Space> spaces;
 
-    public NextSpaces(int num, int Y, int X, Space[][] space){
+    public NextSpaces(int Y, int X, Space[][] space){
         setSpace(1, Y, X-1, space);
         setSpace(2, Y+1, X-1, space);
         setSpace(3, Y+1, X, space);
@@ -30,8 +30,29 @@ public class NextSpaces {
         spaces.add(nw);
     }
 
+    public Space checkSquare(int Y, int X, Space[][] space){
+        boolean bool1 = Y < space.length && Y >= 0;
+        boolean bool2 = X >= 0 && X < space.length;
+        return (bool1 && bool2 ? space[Y][X] : null);
+    }
+
+    public void emptySpaces(){
+        for(int i = 0; i < spaces.size(); i++){
+            Space space = spaces.get(i);
+            if(space != null && space.spaces == null){
+
+            }
+        }
+    }
+
     public int nearbyBombs(){
-        return 0;
+        int bombs = 0;
+        for(int i = 0; i < spaces.size(); i++){
+            if(spaces.get(i).isBomb()){
+                bombs++;
+            }
+        }
+        return bombs;
     }
 
     public void setSpace(int num, int Y, int X, Space[][] space){
