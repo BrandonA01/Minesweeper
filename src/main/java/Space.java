@@ -1,5 +1,6 @@
-public class Space {
+import javax.swing.*;
 
+public class Space extends JButton {
     boolean bomb;
     boolean flagged;
     boolean cleared;

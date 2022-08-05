@@ -9,6 +9,7 @@ public class Game {
 
     public Game(){
         Window w = new Window(WIDTH*X, HEIGHT*Y, GRID, "Minesweeper", this);
+        Board b = new Board();
     }
 
     public static void main(String[] args){
