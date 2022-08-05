@@ -1,24 +1,50 @@
-public class Board {
-    private Space[][] s = new Space[Game.Y][Game.X];        //Y == Row  X == Column
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
 
-    public Board() {
+public class Board extends JPanel {
+    private Space[][] s = new Space[Game.Y][Game.X];        //Y == Row  X == Column
+    private ArrayList<Space> grid = new ArrayList<Space>();
+
+    public Board(GridLayout layout) {
+        super(layout);
         int rem = Game.BOMBS;
         double prob = (double) Game.BOMBS / (Game.Y * Game.X);
         try{
             for(int i = 0; i < Game.Y; i++){        //This is rows first
                 for(int h = 0; h < Game.X; h++){        //This is columns second
                     if(Math.random() < prob && rem > 0){       //Adding a bomb
-                        s[i][h] = new Space(true);
+                        grid.add(s[i][h] = new Space(true));
                         rem--;
                     }
                     else{
-                        s[i][h] = new Space(false);
+                        grid.add(s[i][h] = new Space(false));
                     }
                 }
             }
             calcNearbyBombs();
+            addCells();
         }catch(Exception e){
             e.printStackTrace();
+        }
+    }
+
+    public void addCells(){
+        for(int i = 0; i < grid.size(); i++){
+            if(grid.get(i).nearby < 0){
+                add(grid.get(i)).setBackground(Color.BLACK);
+            }
+            else if(grid.get(i).nearby == 1){
+                add(grid.get(i)).setBackground(Color.yellow);
+            }else if(grid.get(i).nearby == 2){
+                add(grid.get(i)).setBackground(Color.orange);
+            }else if(grid.get(i).nearby > 2){
+                add(grid.get(i)).setBackground(Color.RED);
+            }
+            else{
+                add(grid.get(i));
+            }
+
         }
     }
 
