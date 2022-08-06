@@ -5,10 +5,9 @@ public class Game {
     private boolean end = false;
     private boolean win = false;
     private int flags;
-    private NextSpaces nextSpaces = new NextSpaces();
 
     public Game(){
-        new Window(WIDTH*X, HEIGHT*Y, X, Y, "Minesweeper", this, nextSpaces);
+        new Window(WIDTH*X, HEIGHT*Y, X, Y, "Minesweeper", this);
     }
 
     public static void main(String[] args){

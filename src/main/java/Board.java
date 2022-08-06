@@ -7,8 +7,9 @@ import java.util.ArrayList;
 public class Board extends JPanel {
     private Space[][] s = new Space[Game.Y][Game.X];        //Y == Row  X == Column
     private ArrayList<Space> grid = new ArrayList<Space>();
+    private NextSpaces nextSpaces = new NextSpaces(s);
 
-    public Board(GridLayout layout, NextSpaces nextSpaces) {
+    public Board(GridLayout layout) {
         super(layout);
         int rem = Game.BOMBS;
         double prob = (double) rem / (Game.Y * Game.X); // Amount of bombs left / Number of cells
@@ -30,7 +31,7 @@ public class Board extends JPanel {
                     grid.get(i).setBackground(Color.blue);
                 }
                 else{
-                    ArrayList<Space> space = nextSpaces.set(grid.get(i).getCoords()[0], grid.get(i).getCoords()[1], s);
+                    ArrayList<Space> space = nextSpaces.set(grid.get(i).getCoords()[0], grid.get(i).getCoords()[1]);
                     grid.get(i).setNearby(nextSpaces.nearbyBombs(space));
                     grid.get(i).setBackground(Color.GRAY);
                     grid.get(i).setText(String.valueOf(grid.get(i).nearby));

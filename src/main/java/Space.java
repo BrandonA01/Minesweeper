@@ -37,6 +37,7 @@ public class Space extends JButton {
                         setBackground(Color.white);
                         setEnabled(false);
                         cleared=true;
+                        nextSpaces.emptySpaces(nextSpaces.set(coords[0], coords[1]));
                     }
                     else if (nearby>0) {
                         setBackground(Color.white);

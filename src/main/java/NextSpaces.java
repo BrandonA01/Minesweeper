@@ -11,6 +11,11 @@ public class NextSpaces {
     private Space w;
     private Space nw;
     ArrayList<Space> spaces = new ArrayList<>(8);
+    Space[][] board;
+
+    public NextSpaces(Space[][] board) {
+        this.board = board;
+    }
 
     public Space checkSquare(int Y, int X, Space[][] board){
         boolean bool1 = Y < board.length && Y >= 0;
@@ -23,20 +28,19 @@ public class NextSpaces {
         }
     }
 
-    public void emptySpaces(ArrayList<Space> space, Space[][] board, ArrayList<Space> grid, int i) {
-        Space cell = space.get(i);
-        if (cell != null) {
-            if (!cell.isCleared() && cell.nearby == 0) {
-
-
-            } else if (!cell.isCleared() && cell.nearby > 0) {
-
-            }
-            else{
-
+    public void emptySpaces(ArrayList<Space> space) {
+        for (int i = 0; i < space.size(); i++){
+            if(space.get(i) != null){
+                if (!space.get(i).isCleared() && space.get(i).nearby == 0) {
+                    space.get(i).setCleared(true);
+                    space.get(i).setBackground(Color.white);
+                    emptySpaces(set(space.get(i).coords[0], space.get(i).coords[1]));
+                } else if (!space.get(i).isCleared() && space.get(i).nearby > 0) {
+                    space.get(i).setCleared(true);
+                    space.get(i).setBackground(Color.white);
+                }
             }
         }
-
     }
 
     public int nearbyBombs(ArrayList<Space> space){
@@ -51,7 +55,7 @@ public class NextSpaces {
         return bombs;
     }
 
-    public ArrayList<Space> set(int Y, int X, Space[][] board){
+    public ArrayList<Space> set(int Y, int X){
         spaces.clear();
         setSpace(1, checkSquare(Y-1, X, board));
         setSpace(2, checkSquare(Y-1, X+1, board));
