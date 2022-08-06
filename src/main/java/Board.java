@@ -25,16 +25,13 @@ public class Board extends JPanel {
                 }
             }
             for (int i = 0; i < grid.size(); i++) {
+                grid.get(i).setBackground(Color.GRAY);
                 if(grid.get(i).isBomb()){
-                    grid.get(i).setText("x");
                     grid.get(i).setNearby(-1);
-                    grid.get(i).setBackground(Color.blue);
                 }
                 else{
                     ArrayList<Space> space = nextSpaces.set(grid.get(i).getCoords()[0], grid.get(i).getCoords()[1]);
                     grid.get(i).setNearby(nextSpaces.nearbyBombs(space));
-                    grid.get(i).setBackground(Color.GRAY);
-                    grid.get(i).setText(String.valueOf(grid.get(i).nearby));
                 }
 
                 addCells(nextSpaces, grid);

@@ -34,15 +34,16 @@ public class NextSpaces {
                 if (!space.get(i).isCleared() && space.get(i).nearby == 0) {
                     space.get(i).setCleared(true);
                     space.get(i).setBackground(Color.white);
-                    emptySpaces(set(space.get(i).coords[0], space.get(i).coords[1]));
+                    emptySpaces(setChecker(space.get(i).coords[0], space.get(i).coords[1]));
                 } else if (!space.get(i).isCleared() && space.get(i).nearby > 0) {
                     space.get(i).setCleared(true);
                     space.get(i).setBackground(Color.white);
+                    space.get(i).setText(String.valueOf(space.get(i).nearby));
                     ArrayList<Space> s = set(space.get(i).coords[0], space.get(i).coords[1]);
                     for(int j = 0; j < s.size(); j++){
                         if(s.get(j) != null){
                             if (s.get(j).nearby == 0) {
-                                emptySpaces(set(s.get(j).coords[0], s.get(j).coords[1]));
+                                emptySpaces(setChecker(s.get(j).coords[0], s.get(j).coords[1]));
                             }
                         }
                     }
@@ -61,6 +62,19 @@ public class NextSpaces {
             }
         }
         return bombs;
+    }
+
+    public ArrayList<Space> setChecker(int Y, int X){
+        spaces.clear();
+        setSpace(1, checkSquare(Y-1, X, board));
+        setSpace(3, checkSquare(Y, X+1, board));
+        setSpace(5, checkSquare(Y+1, X, board));
+        setSpace(7, checkSquare(Y, X-1, board));
+        spaces.add(n);
+        spaces.add(e);
+        spaces.add(s);
+        spaces.add(w);
+        return spaces;
     }
 
     public ArrayList<Space> set(int Y, int X){
