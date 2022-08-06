@@ -38,6 +38,14 @@ public class NextSpaces {
                 } else if (!space.get(i).isCleared() && space.get(i).nearby > 0) {
                     space.get(i).setCleared(true);
                     space.get(i).setBackground(Color.white);
+                    ArrayList<Space> s = set(space.get(i).coords[0], space.get(i).coords[1]);
+                    for(int j = 0; j < s.size(); j++){
+                        if(s.get(j) != null){
+                            if (s.get(j).nearby == 0) {
+                                emptySpaces(set(s.get(j).coords[0], s.get(j).coords[1]));
+                            }
+                        }
+                    }
                 }
             }
         }
