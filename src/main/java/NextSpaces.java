@@ -45,7 +45,7 @@ public class NextSpaces {
         }
         for(int i = 0; i < queue.size()-1; i++){
             queue.remove(i);
-            emptySpaces(setChecker(queue.get(i).coords[0], queue.get(i).coords[1]));
+            emptySpaces(set(queue.get(i).coords[0], queue.get(i).coords[1]));
         }
     }
 
@@ -59,19 +59,6 @@ public class NextSpaces {
             }
         }
         return bombs;
-    }
-
-    public ArrayList<Space> setChecker(int Y, int X){
-        spaces.clear();
-        setSpace(1, checkSquare(Y-1, X, board));
-        setSpace(3, checkSquare(Y, X+1, board));
-        setSpace(5, checkSquare(Y+1, X, board));
-        setSpace(7, checkSquare(Y, X-1, board));
-        spaces.add(n);
-        spaces.add(e);
-        spaces.add(s);
-        spaces.add(w);
-        return spaces;
     }
 
     public ArrayList<Space> set(int Y, int X){
