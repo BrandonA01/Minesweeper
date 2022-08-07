@@ -34,12 +34,10 @@ public class Space extends JButton {
             public void mouseClicked(MouseEvent e) {
                 if(!cleared){
                     if(nearby == 0){
-                        cleared = true;
                         setBackground(Color.white);
                         nextSpaces.emptySpaces(nextSpaces.setChecker(coords[0], coords[1]));
                     }
                     else if (nearby>0) {
-                        cleared = true;
                         setBackground(Color.white);
                         setText(String.valueOf(nearby));
                     }

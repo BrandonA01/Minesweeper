@@ -40,20 +40,12 @@ public class NextSpaces {
                     space.get(i).setCleared(true);
                     space.get(i).setBackground(Color.white);
                     space.get(i).setText(String.valueOf(space.get(i).nearby));
-                    ArrayList<Space> s = set(space.get(i).coords[0], space.get(i).coords[1]);
-                    for(int j = 0; j < s.size(); j++){
-                        if(s.get(j) != null){
-                            if (s.get(j).nearby == 0) {
-                                queue.add(space.get(j));
-                            }
-                        }
-                    }
                 }
             }
         }
-        for(int i = 0; i < queue.size(); i++){
-            emptySpaces(setChecker(queue.get(i).coords[0], queue.get(i).coords[1]));
+        for(int i = 0; i < queue.size()-1; i++){
             queue.remove(i);
+            emptySpaces(setChecker(queue.get(i).coords[0], queue.get(i).coords[1]));
         }
     }
 
