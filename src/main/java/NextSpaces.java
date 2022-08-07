@@ -12,6 +12,7 @@ public class NextSpaces {
     private Space nw;
     ArrayList<Space> spaces = new ArrayList<>(8);
     Space[][] board;
+    ArrayList<Space> queue = new ArrayList<>();
 
     public NextSpaces(Space[][] board) {
         this.board = board;
@@ -34,7 +35,7 @@ public class NextSpaces {
                 if (!space.get(i).isCleared() && space.get(i).nearby == 0) {
                     space.get(i).setCleared(true);
                     space.get(i).setBackground(Color.white);
-                    emptySpaces(setChecker(space.get(i).coords[0], space.get(i).coords[1]));
+                    queue.add(space.get(i));
                 } else if (!space.get(i).isCleared() && space.get(i).nearby > 0) {
                     space.get(i).setCleared(true);
                     space.get(i).setBackground(Color.white);
@@ -43,12 +44,16 @@ public class NextSpaces {
                     for(int j = 0; j < s.size(); j++){
                         if(s.get(j) != null){
                             if (s.get(j).nearby == 0) {
-                                emptySpaces(setChecker(s.get(j).coords[0], s.get(j).coords[1]));
+                                queue.add(space.get(j));
                             }
                         }
                     }
                 }
             }
+        }
+        for(int i = 0; i < queue.size(); i++){
+            emptySpaces(setChecker(queue.get(i).coords[0], queue.get(i).coords[1]));
+            queue.remove(i);
         }
     }
 
