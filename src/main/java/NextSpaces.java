@@ -43,9 +43,16 @@ public class NextSpaces {
                 }
             }
         }
-        for(int i = 0; i < queue.size()-1; i++){
-            queue.remove(i);
-            emptySpaces(set(queue.get(i).coords[0], queue.get(i).coords[1]));
+        for(int i = 0; i < queue.size(); i++){
+            if (queue.size()==1){
+                Space s = queue.get(i);
+                queue.remove(i);
+                emptySpaces(set(s.coords[0], s.coords[1]));
+            }
+            else{
+                queue.remove(i);
+                emptySpaces(set(queue.get(i).coords[0], queue.get(i).coords[1]));
+            }
         }
     }
 
